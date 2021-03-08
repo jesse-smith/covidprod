@@ -3,6 +3,8 @@
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Codecov test coverage](https://codecov.io/gh/jesse-smith/covidprod/branch/master/graph/badge.svg)](https://codecov.io/gh/jesse-smith/covidprod?branch=master)
+[![R-CMD-check](https://github.com/jesse-smith/covidprod/workflows/R-CMD-check/badge.svg)](https://github.com/jesse-smith/covidprod/actions)
 <!-- badges: end -->
 
 covidprod reads productivity info from the SCHD REDcap and transforms the data
