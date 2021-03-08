@@ -8,7 +8,7 @@
 <!-- badges: end -->
 
 covidprod reads productivity info from the SCHD REDcap and transforms the data
-into summary statistics for administration.
+into summary statistics for administration...
 
 ## Installation
 
