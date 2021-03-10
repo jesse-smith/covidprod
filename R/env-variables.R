@@ -45,5 +45,5 @@
 #'
 #' @md
 #'
-#' @name env_vars
+#' @name env-variables
 NULL
