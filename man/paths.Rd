@@ -8,7 +8,7 @@
 \usage{
 path_nit(date = NULL, force_latest = TRUE)
 
-path_nit(date = NULL, force_latest = TRUE)
+path_nca(date = NULL, force_latest = TRUE)
 }
 \arguments{
 \item{date}{A \code{Date} or string in the format "YYYY-MM-DD"}

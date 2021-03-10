@@ -30,7 +30,7 @@ path_nit <- function(date = NULL, force_latest = TRUE) {
 #' @rdname paths
 #'
 #' @export
-path_nit <- function(date = NULL, force_latest = TRUE) {
+path_nca <- function(date = NULL, force_latest = TRUE) {
   path_by_date(
     dir ="V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nca/",
     date_format = "%Y-%m-%d",
@@ -114,7 +114,7 @@ path_by_date <- function(
   # Get list of files matching date, or all files if `date = NULL`
   files <- dir %>%
     fs::dir_ls(type = type, regexp = file_regex) %>%
-    vec_sort()
+    vctrs::vec_sort()
 
   # If `date = NULL`, return the file with the latest date in the file name
   # Otherwise just sort `files` and return

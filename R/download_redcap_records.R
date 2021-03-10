@@ -155,7 +155,7 @@ download_redcap_records <- function(
     )
     rlang::warn(msg)
   }
-  file <- fs::path_ext_remove(file, ext = "csv")
+  file <- fs::path_ext_set(file, ext = "csv")
 
   # Create full file path
   path <- path_create(dir, file)
@@ -185,16 +185,15 @@ download_redcap_records <- function(
   # Add filter logic if `filter` is not `NULL`
   if (!is.null(filter)) api_params <- c(api_params, filterLogic = filter)
 
-  nit_data <- httr::RETRY(
+  httr::RETRY(
     "POST",
     url = api_url,
     body = api_params,
-    encode = "form"
+    encode = "form",
+    httr::progress(),
+    httr::write_disk(path, overwrite = force)
   ) %>%
-    httr::stop_for_status(paste("download NIT data:", httr::content(.))) %>%
-    httr::content(as = "text") %>%
-    jsonlite::fromJSON() %>%
-    dplyr::as_tibble()
+    httr::stop_for_status(paste("download REDcap data:", httr::content(.)))
 
-  write_file_delim(nit_data, path = path, force = force)
+  path
 }

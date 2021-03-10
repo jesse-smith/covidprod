@@ -13,6 +13,9 @@
 #' @param path The path to the file to read; if supplied, the function will read
 #'   this file instead
 #'
+#' @param clean_names Should column names be cleaned by
+#'   \code{\link[janitor:clean_names]{clean_names()}}?
+#'
 #' @param ... Additional parameters to pass to
 #'   \code{\link[covidprod:read_file_delim]{read_file_delim()}}
 #'
@@ -26,13 +29,27 @@ NULL
 #' @rdname load-case-projects
 #'
 #' @export
-load_nit <- function(date = NULL, path = path_nit(date), ...) {
-  read_file_delim(path, ...)
+load_nit <- function(
+  date = NULL,
+  path = path_nit(date),
+  clean_names = TRUE,
+  ...
+) {
+  data <- read_file_delim(path, ...)
+
+  if (clean_names) janitor::clean_names(data) else data
 }
 
 #' @rdname load-case-projects
 #'
 #' @export
-load_nca <- function(date = NULL, path = path_nca(date), ...) {
-  read_file_delim(path, ...)
+load_nca <- function(
+  date = NULL,
+  path = path_nca(date),
+  clean_names = TRUE,
+  ...
+) {
+  data <- read_file_delim(path, ...)
+
+  if (clean_names) janitor::clean_names(data) else data
 }

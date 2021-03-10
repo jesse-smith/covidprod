@@ -6,9 +6,9 @@
 \alias{load_nca}
 \title{Load Last Downloaded Data for a REDcap Project}
 \usage{
-load_nit(date = NULL, path = path_nit(date), ...)
+load_nit(date = NULL, path = path_nit(date), clean_names = TRUE, ...)
 
-load_nca(date = NULL, path = path_nca(date), ...)
+load_nca(date = NULL, path = path_nca(date), clean_names = TRUE, ...)
 }
 \arguments{
 \item{date}{The download date of the file to read; the default (\code{NULL}) will
@@ -16,6 +16,9 @@ read the most recent file}
 
 \item{path}{The path to the file to read; if supplied, the function will read
 this file instead}
+
+\item{clean_names}{Should column names be cleaned by
+\code{\link[janitor:clean_names]{clean_names()}}?}
 
 \item{...}{Additional parameters to pass to
 \code{\link[covidprod:read_file_delim]{read_file_delim()}}}
