@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download New Interview Tool Data — download_redcap_records • covidprod</title>
+<title>How to Access Sensitive Information Non-Interactively with Environment Vars — env-variables • covidprod</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,11 @@
 
 
 
-<meta property="og:title" content="Download New Interview Tool Data — download_redcap_records" />
-<meta property="og:description" content="download_redcap_records() downloads records from a REDcap project" />
+<meta property="og:title" content="How to Access Sensitive Information Non-Interactively with Environment Vars — env-variables" />
+<meta property="og:description" content="When writing code that might be shared, it's bad practice to hard-code
+sensitive information in a script (or package, obviously). For data that
+doesn't need to be shared, but doesn't necessarily need encryption,
+environment variables provide a way to store and retrieve information." />
 
 
 
@@ -108,74 +111,56 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download New Interview Tool Data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidprod/blob/master/R/download_redcap_records.R'><code>R/download_redcap_records.R</code></a></small>
-    <div class="hidden name"><code>download_redcap_records.Rd</code></div>
+    <h1>How to Access Sensitive Information Non-Interactively with Environment Vars</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidprod/blob/master/R/env-variables.R'><code>R/env-variables.R</code></a></small>
+    <div class="hidden name"><code>env-variables.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>download_redcap_records()</code> downloads records from a REDcap project</p>
+    <p>When writing code that might be shared, it's bad practice to hard-code
+sensitive information in a script (or package, obviously). For data that
+doesn't need to be shared, but doesn't necessarily need encryption,
+environment variables provide a way to store and retrieve information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>download_redcap_records</span><span class='op'>(</span>
-  <span class='va'>api_token</span>,
-  <span class='va'>dir</span>,
-  <span class='va'>file</span>,
-  headers <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"raw"</span>, <span class='st'>"label"</span><span class='op'>)</span>,
-  values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"raw"</span>, <span class='st'>"label"</span><span class='op'>)</span>,
-  filter <span class='op'>=</span> <span class='cn'>NULL</span>,
-  force <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>api_token</th>
-      <td><p><code>character</code>. API token/key for accessing the project
-programmatically. Best practice is to set as an environment variable and
-retrieve using <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("token_environment_variable")</a></code>. See
-<code><a href='env-variables.html'>env-variables</a></code> for more information.</p></td>
-    </tr>
-    <tr>
-      <th>dir</th>
-      <td><p><code>character</code>. Directory to save data; this should usually remain
-unchanged.</p></td>
-    </tr>
-    <tr>
-      <th>file</th>
-      <td><p><code>character</code>. File name for data; this should usually remain
-unchanged. The resulting file will <strong>always</strong> have a "csv" extension; if
-you pass a <code>file</code> name without a "csv" extension, the function will
-replace it with a warning.</p></td>
-    </tr>
-    <tr>
-      <th>headers</th>
-      <td><p><code>"raw"</code> or <code>"label"</code>. Should column names ("headers") be
-exported as the raw variable names (<code>"raw"</code>, the default) or the label
-shown in the UI (<code>"label"</code>)?</p></td>
-    </tr>
-    <tr>
-      <th>values</th>
-      <td><p><code>"raw"</code> or <code>"label"</code>. Should values in multiple-choice and
-checkbox fields be exported as the raw coded value (<code>"raw"</code>, the default)
-or the label for the coded value (<code>"label"</code>)?</p></td>
-    </tr>
-    <tr>
-      <th>filter</th>
-      <td><p><code>character</code>. REDcap filtering logic to apply prior to download.
-This must be in the REDcap logic syntax.</p></td>
-    </tr>
-    <tr>
-      <th>force</th>
-      <td><p>Should the download overwrite an existing file, if one exists?
-The default is <code>FALSE</code>, which errors if an existing file is found.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The path to the data as an <code>fs_path</code> character vector</p>
+    <p><code>Environment variables</code> are just variables that are
+available using the <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv()</a></code> function.
+They're not specific to R; your Windows software uses a number of environment
+variables to function. They're particularly useful for storing information
+that you need to access from multiple places, or information that you don't
+want to leave your computer, like API keys. You can also store usernames and
+passwords in this file; it's better than entering them directly, but note
+that they <strong>will not be encrypted</strong>. A better solution for usernames,
+passwords, and other things that should be encrypted is the
+<a href='https://github.com/r-lib/keyring'>keyring</a> package; however, the
+coviData package does not currently follows this convention.</p>
+<p>To use environment variables, follow these steps:</p>
+<ol>
+<li><p>Go to the Windows search bar and type "environment variable". You
+should see an option to "Edit environment variables for your account". Open
+it. <em>(Note that the option "Edit the system environment variables"
+requires admin rights; you can't use it.)</em></p></li>
+<li><p>You should see a popup box with two panes; "User variables for
+your_username" on top and "System variables" on bottom.</p></li>
+<li><p>Click "New..." under the "User variables..." section.</p></li>
+<li><p>This will open an input box with fields "Variable name" and
+"Variable value". These fields correspond to the variable name and value in
+R. Type the name and value of your variable in each field, and click "OK".</p></li>
+<li><p>The variable should now appear in the "User variables..." pane. You
+can click "OK" to exit the window.</p></li>
+<li><p>To see a new variable in R, you need to restart the sesson. Save your
+work, then go to Session -&gt; Restart R in the top left corner of R Studio.
+Alternately, you can close R Studio and re-open it.</p></li>
+<li><p>Type <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("your_variable")</a></code> into the console and press
+<code>Enter</code>. R should return your variable value!</p></li>
+</ol>
+
+<p><code>coviData</code> currently uses environment variables for REDcap API tokens,
+but may expand to ESSENCE and NBS tokens as well in the future.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
