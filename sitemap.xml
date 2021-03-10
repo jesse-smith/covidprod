@@ -3,4 +3,40 @@
   <url>
     <loc>https://jesse-smith.github.io/covidprod/index.html</loc>
   </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/download-case-projects.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/download_redcap_records.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/env_vars.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/load-case-projects.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/path_by_date.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/path_clean.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/path_create.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/paths.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/read_file_delim.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/utils-tidyeval-symbols.html</loc>
+  </url>
+  <url>
+    <loc>https://jesse-smith.github.io/covidprod/reference/write_file_delim.html</loc>
+  </url>
 </urlset>

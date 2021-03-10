@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • covidprod</title>
+<title>Efficiently Write Delimited Files — write_file_delim • covidprod</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Efficiently Write Delimited Files — write_file_delim" />
+<meta property="og:description" content="write_file_delim() writes delimited files using
+vroom_write()." />
 
 
 
@@ -58,7 +60,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -105,96 +107,60 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Efficiently Write Delimited Files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidprod/blob/master/R/write_file_delim.R'><code>R/write_file_delim.R</code></a></small>
+    <div class="hidden name"><code>write_file_delim.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p><code>write_file_delim()</code> writes delimited files using
+<code><a href='https://vroom.r-lib.org/reference/vroom_write.html'>vroom_write()</a></code>.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>write_file_delim</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>path</span>, delim <span class='op'>=</span> <span class='st'>","</span>, na <span class='op'>=</span> <span class='st'>""</span>, force <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="download-case-projects.html">download_nit()</a></code> <code><a href="download-case-projects.html">download_nca()</a></code> </p>
-        </td>
-        <td><p>Download New Interview Tool Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="download_redcap_records.html">download_redcap_records()</a></code> </p>
-        </td>
-        <td><p>Download New Interview Tool Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="env_vars.html">env_vars</a></code> </p>
-        </td>
-        <td><p>How to Access Sensitive Information Non-Interactively with Environment Vars</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load-case-projects.html">load_nit()</a></code> <code><a href="load-case-projects.html">load_nca()</a></code> </p>
-        </td>
-        <td><p>Load Last Downloaded Data for a REDcap Project</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="path_by_date.html">path_by_date()</a></code> </p>
-        </td>
-        <td><p>Return the Path to a NBS Investigations File</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="path_clean.html">path_clean()</a></code> </p>
-        </td>
-        <td><p>Clean a Path with the fs Package</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="path_create.html">path_create()</a></code> </p>
-        </td>
-        <td><p>Create a Path from Components</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="paths.html">path_nit()</a></code> <code><a href="paths.html">path_nit()</a></code> </p>
-        </td>
-        <td><p>Get Paths to Last Downloaded Data for a REDcap Project</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_file_delim.html">read_file_delim()</a></code> </p>
-        </td>
-        <td><p>Efficently Read Delimited Files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="write_file_delim.html">write_file_delim()</a></code> </p>
-        </td>
-        <td><p>Efficiently Write Delimited Files</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Data frame or data frame extension to write to disk</p></td>
+    </tr>
+    <tr>
+      <th>path</th>
+      <td><p>Path or connection to write to</p></td>
+    </tr>
+    <tr>
+      <th>delim</th>
+      <td><p>Delimiter used to separate values. Defaults to <code>","</code> to write
+comma-separated value (CSV) files.</p></td>
+    </tr>
+    <tr>
+      <th>na</th>
+      <td><p>String used for missing values. Defaults to blank (<code>""</code>).</p></td>
+    </tr>
+    <tr>
+      <th>force</th>
+      <td><p>Should any existing files be overwritten?</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments to pass to
+<code><a href='https://vroom.r-lib.org/reference/vroom_write.html'>vroom_write()</a></code></p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The input data</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>By default, files are comma-delimited with missing values represented as
+blank strings (<code>""</code>).</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

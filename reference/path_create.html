@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • covidprod</title>
+<title>Create a Path from Components — path_create • covidprod</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Create a Path from Components — path_create" />
+<meta property="og:description" content="path_create() creates a cleaned path from the components specified in ...
+and an optional file extension (ext). The path is automatically expanded
+using either the R or system definition of the home directory." />
 
 
 
@@ -58,7 +61,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -105,96 +108,49 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Create a Path from Components</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidprod/blob/master/R/path_create.R'><code>R/path_create.R</code></a></small>
+    <div class="hidden name"><code>path_create.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p><code>path_create()</code> creates a cleaned path from the components specified in <code>...</code>
+and an optional file extension (<code>ext</code>). The path is automatically expanded
+using either the <strong>R</strong> or system definition of the home directory.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>path_create</span><span class='op'>(</span><span class='va'>...</span>, ext <span class='op'>=</span> <span class='cn'>NULL</span>, home <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"r"</span>, <span class='st'>"user"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="download-case-projects.html">download_nit()</a></code> <code><a href="download-case-projects.html">download_nca()</a></code> </p>
-        </td>
-        <td><p>Download New Interview Tool Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="download_redcap_records.html">download_redcap_records()</a></code> </p>
-        </td>
-        <td><p>Download New Interview Tool Data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="env_vars.html">env_vars</a></code> </p>
-        </td>
-        <td><p>How to Access Sensitive Information Non-Interactively with Environment Vars</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="load-case-projects.html">load_nit()</a></code> <code><a href="load-case-projects.html">load_nca()</a></code> </p>
-        </td>
-        <td><p>Load Last Downloaded Data for a REDcap Project</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="path_by_date.html">path_by_date()</a></code> </p>
-        </td>
-        <td><p>Return the Path to a NBS Investigations File</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="path_clean.html">path_clean()</a></code> </p>
-        </td>
-        <td><p>Clean a Path with the fs Package</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="path_create.html">path_create()</a></code> </p>
-        </td>
-        <td><p>Create a Path from Components</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="paths.html">path_nit()</a></code> <code><a href="paths.html">path_nit()</a></code> </p>
-        </td>
-        <td><p>Get Paths to Last Downloaded Data for a REDcap Project</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_file_delim.html">read_file_delim()</a></code> </p>
-        </td>
-        <td><p>Efficently Read Delimited Files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="write_file_delim.html">write_file_delim()</a></code> </p>
-        </td>
-        <td><p>Efficiently Write Delimited Files</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>...</th>
+      <td><p>character vectors, if any values are NA, the result will also be
+NA. The paths follow the recycling rules used in the tibble package,
+namely that only length 1 arguments are recycled.</p></td>
+    </tr>
+    <tr>
+      <th>ext</th>
+      <td><p>An optional extension to append to the generated path.</p></td>
+    </tr>
+    <tr>
+      <th>home</th>
+      <td><p>The home directory definition to use when expanding a path. The
+default is to use <strong>R</strong>'s definition, but the system definition of the
+user's home directory can also be used. These are equivalent to calling
+<code>path_expand_r()</code> or <code>path_expand()</code>, respectively.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The combined and cleaned path in an <code>fs_path</code> object, which is a
+character vector that also has class <code>fs_path</code></p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
