@@ -127,9 +127,9 @@ respective REDcap project. To find the file paths to these data, use
 <code><a href='download-case-projects.html'>download_nca()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_nit</span><span class='op'>(</span>date <span class='op'>=</span> <span class='cn'>NULL</span>, path <span class='op'>=</span> <span class='fu'><a href='paths.html'>path_nit</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>load_nit</span><span class='op'>(</span>date <span class='op'>=</span> <span class='cn'>NULL</span>, path <span class='op'>=</span> <span class='fu'><a href='paths.html'>path_nit</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span>, clean_names <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>load_nca</span><span class='op'>(</span>date <span class='op'>=</span> <span class='cn'>NULL</span>, path <span class='op'>=</span> <span class='fu'><a href='paths.html'>path_nca</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'>load_nca</span><span class='op'>(</span>date <span class='op'>=</span> <span class='cn'>NULL</span>, path <span class='op'>=</span> <span class='fu'><a href='paths.html'>path_nca</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span>, clean_names <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,6 +143,11 @@ read the most recent file</p></td>
       <th>path</th>
       <td><p>The path to the file to read; if supplied, the function will read
 this file instead</p></td>
+    </tr>
+    <tr>
+      <th>clean_names</th>
+      <td><p>Should column names be cleaned by
+<code><a href='https://rdrr.io/pkg/janitor/man/clean_names.html'>clean_names()</a></code>?</p></td>
     </tr>
     <tr>
       <th>...</th>
