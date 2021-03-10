@@ -43,7 +43,10 @@ path_create <- function(..., ext = NULL, home = c("r", "user")) {
 #'   vector that also has class `fs_path`
 path_clean <- function(path, home = c("r", "user")) {
 
-  home <- gsub("\\s+", replacement = "", tolower(home))
+  home <- home %>%
+    stringr::str_to_lower() %>%
+    stringr::str_remove_all("\\s+")
+
   home <- rlang::arg_match(home)[[1]]
 
   if (home == "r") {

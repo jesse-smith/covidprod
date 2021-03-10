@@ -139,7 +139,11 @@ download_redcap_records <- function(
   values  <- rlang::arg_match(values)[[1L]]
 
   # Check and change file extension - warn if invalid
-  ext <- gsub("\\s+", replacement = "", tolower(fs::path_ext(file)))
+  ext <- file %>%
+    fs::path_ext() %>%
+    stringr::str_to_lower() %>%
+    stringr::str_remove_all("\\s+")
+
   if (ext == "") {
     msg <- paste0(
       "`file` was supplied without a file extension; ",
