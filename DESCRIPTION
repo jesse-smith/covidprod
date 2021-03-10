@@ -8,21 +8,23 @@ Authors@R:
            email = "jesse.smith@shelbycountytn.gov")
 Description: covidprod reads productivity info from the
     SCHD REDcap and transforms the data into summary statistics for
-    administration
+    administration.
 License: GPL (>= 3)
 URL: https://jesse-smith.github.io/covidprod,
     https://github.com/jesse-smith/covidprod
 BugReports: https://github.com/jesse-smith/covidprod/issues
-Imports: 
-    coviData (>= 0.0.0.9001),
-    rlang,
-    magrittr,
+Imports:
     fs,
-    stringr
+    httr,
+    janitor,
+    magrittr,
+    rlang,
+    vroom
 Suggests: 
     covr,
     dplyr,
     lubridate,
+    stringr,
     testthat (>= 3.0.0),
     tibble,
     vctrs
