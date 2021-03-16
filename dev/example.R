@@ -1,4 +1,4 @@
-library(dplyr)
+library("dplyr")
 
 # dplyr::filter() - for filtering datasets
 
@@ -11,3 +11,7 @@ library(dplyr)
 #     - lubridate::ymd()
 #   - Will sometimes add time
 #     - lubridate::parse_date_time(orders = "ymdHMS")
+
+install.packages("vroom")
+
+install.packages("janitor")
