@@ -15,12 +15,12 @@ yesterday <- lubridate::today()-1
 
 
 NCA$assign_date <- lubridate::parse_date_time(NCA$assign_date, orders= "ymdHM")
-glimpse(NCA)
+
 
 NCA$inttime <- stringr::str_sub(NCA$answer_4, 1, 16)
 
 NCA$interviewtime <- lubridate::parse_date_time(NCA$inttime, orders= "ymdHM")
-glimpse(NCA)
+
 
 
 library(dplyr)
@@ -49,7 +49,7 @@ interviewed <- sum(date_asg_int$answer_3== "Yes" &
 interview$interviewtimeonly <- stringr::str_sub(interview$interviewtime, 1, 10)
 int_yest <- subset(interview, interview$interviewtimeonly == yesterday)
 
-#glimpse(interview)
+
 
 # interviewed in 24 hours
 interviewed24 <- sum(int_yest$timetoint <= 24, na.rm = TRUE)
@@ -60,7 +60,7 @@ interviewed24_48 <- sum(int_yest$timetoint >= 24 & int_yest$timetoint <=48, na.r
 #number interviewed in 48 hours
 interviewed48 <- sum(int_yest$timetoint<=48, na.rm = TRUE)
 
-#% interviewed in 24 hours
+#percent interviewed in 24 hours
 percent24 <- (interviewed24/interviewed)
 
 
@@ -81,7 +81,7 @@ contact_ident<- sum(contacts_yest$numb_contacts_16, na.rm = TRUE)
 
 
 
-#unable to reach
+#number unable to reach
 unable<- subset(NIT, select= c(resultofinter_3, dateap))
 
 unable$dateaponly <- stringr::str_sub(unable$dateap, 1, 10)
@@ -91,7 +91,7 @@ unable_yest$resultofinter_3 <- as.numeric(unable_yest$resultofinter_3)
 unable_ident<- sum(unable_yest$resultofinter_3, na.rm = TRUE)
 
 
-#refused to interview
+#number refused to interview
 refused<- subset(NIT, select= c(resultofinter, dateap))
 
 refused$dateaponly <- stringr::str_sub(refused$dateap, 1, 10)
@@ -123,9 +123,7 @@ row_to_add <- tibble(
   "Total Cases Closed"  = total_cs_clsd,
 )
 
-glimpse(row_to_add)
 
-?read_excel
 excel_data <- readxl::read_excel("V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/productivity report/productivity report.xlsx",
                                  col_types = c("text", "date", rep("numeric", times = 10)))
 
