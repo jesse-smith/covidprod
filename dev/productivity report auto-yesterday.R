@@ -16,10 +16,7 @@ yesterday <- lubridate::today()-1
 
 NCA$assign_date <- lubridate::parse_date_time(NCA$assign_date, orders= "ymdHM")
 
-
-NCA$inttime <- stringr::str_sub(NCA$answer_4, 1, 16)
-
-NCA$interviewtime <- lubridate::parse_date_time(NCA$inttime, orders= "ymdHM")
+NCA$interviewtime <- lubridate::parse_date_time(NCA$answer_4, orders= c("ymdHM", "ymdHMS"))
 
 
 
@@ -36,17 +33,17 @@ interview <- subset(date_asg_int, answer_3=="Yes")
 
 
 #number assigned
-date_asg_int$assign_dateonly <- stringr::str_sub(date_asg_int$assign_date, 1, 16)
+date_asg_int$assign_dateonly <- lubridate::as_date(date_asg_int$assign_date)
 assigned<-sum(date_asg_int$assign_dateonly==yesterday, na.rm = TRUE)
 
 
 #number interviewed
-date_asg_int$interviewtimeonly <- stringr::str_sub(date_asg_int$interviewtime, 1, 10)
+date_asg_int$interviewtimeonly <- lubridate::as_date(date_asg_int$interviewtime)
 interviewed <- sum(date_asg_int$answer_3== "Yes" &
                         date_asg_int$interviewtimeonly==yesterday, na.rm = TRUE)
 
 
-interview$interviewtimeonly <- stringr::str_sub(interview$interviewtime, 1, 10)
+interview$interviewtimeonly <- lubridate::as_date(interview$interviewtime)
 int_yest <- subset(interview, interview$interviewtimeonly == yesterday)
 
 
@@ -73,7 +70,7 @@ NIT$dateap <- lubridate::parse_date_time(NIT$date, orders= "ymdHM")
 #number of contacts identified
 contacts<- subset(NIT, select= c(dateap, numb_contacts_16))
 
-contacts$dateaponly <- stringr::str_sub(contacts$dateap, 1, 10)
+contacts$dateaponly <- lubridate::as_date(contacts$dateap)
 contacts_yest <- subset (contacts,contacts$dateaponly == yesterday)
 
 contacts_yest$numb_contacts_16<- as.numeric(contacts_yest$numb_contacts_16)
@@ -84,7 +81,7 @@ contact_ident<- sum(contacts_yest$numb_contacts_16, na.rm = TRUE)
 #number unable to reach
 unable<- subset(NIT, select= c(resultofinter_3, dateap))
 
-unable$dateaponly <- stringr::str_sub(unable$dateap, 1, 10)
+unable$dateaponly <- lubridate::as_date(unable$dateap)
 unable_yest <- subset(unable, unable$dateaponly == yesterday)
 
 unable_yest$resultofinter_3 <- as.numeric(unable_yest$resultofinter_3)
@@ -94,7 +91,7 @@ unable_ident<- sum(unable_yest$resultofinter_3, na.rm = TRUE)
 #number refused to interview
 refused<- subset(NIT, select= c(resultofinter, dateap))
 
-refused$dateaponly <- stringr::str_sub(refused$dateap, 1, 10)
+refused$dateaponly <- lubridate::as_date(refused$dateap)
 refused_yest <- subset(refused, refused$dateaponly == yesterday)
 
 
