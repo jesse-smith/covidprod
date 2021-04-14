@@ -122,7 +122,7 @@ download_nca() downloads records from the New Case Assignment (NCA) project" />
     <pre class="usage"><span class='fu'>download_nit</span><span class='op'>(</span>
   api_token <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"redcap_NIT_token"</span><span class='op'>)</span>,
   headers <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"raw"</span>, <span class='st'>"label"</span><span class='op'>)</span>,
-  values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"raw"</span>, <span class='st'>"label"</span><span class='op'>)</span>,
+  values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"label"</span>, <span class='st'>"raw"</span><span class='op'>)</span>,
   filter <span class='op'>=</span> <span class='cn'>NULL</span>,
   dir <span class='op'>=</span> <span class='st'>"V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nit/"</span>,
   file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"nit_data_"</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>".csv"</span><span class='op'>)</span>,
@@ -132,7 +132,7 @@ download_nca() downloads records from the New Case Assignment (NCA) project" />
 <span class='fu'>download_nca</span><span class='op'>(</span>
   api_token <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"redcap_NCA_token"</span><span class='op'>)</span>,
   headers <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"raw"</span>, <span class='st'>"label"</span><span class='op'>)</span>,
-  values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"raw"</span>, <span class='st'>"label"</span><span class='op'>)</span>,
+  values <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"label"</span>, <span class='st'>"raw"</span><span class='op'>)</span>,
   filter <span class='op'>=</span> <span class='cn'>NULL</span>,
   dir <span class='op'>=</span> <span class='st'>"V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nca/"</span>,
   file <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"nca_data_"</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>".csv"</span><span class='op'>)</span>,
