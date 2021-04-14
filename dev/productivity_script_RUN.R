@@ -1,8 +1,25 @@
+coviData::log_start("productivity_report.log")
+on.exit(coviData::log_end())
+
 library(tidyverse)
+library(covidprod)
 
 # these download all of the project data
-download_nca()
-download_nit()
+
+nca_date <- path_nca() %>%
+  fs::path_file() %>%
+  fs::path_ext_remove() %>%
+  stringr::str_extract("[0-9]{1,4}.?[0-9]{1,2}.?[0-9]{1,4}") %>%
+  lubridate::as_date()
+
+nit_date <- path_nit() %>%
+  fs::path_file() %>%
+  fs::path_ext_remove() %>%
+  stringr::str_extract("[0-9]{1,4}.?[0-9]{1,2}.?[0-9]{1,4}") %>%
+  lubridate::as_date()
+
+if (nca_date != lubridate::today()) download_nca()
+if (nit_date != lubridate::today()) download_nit()
 
 # this loads the data
 NCA <- load_nca()
@@ -23,7 +40,6 @@ date_asg_int$timetoint <- difftime(date_asg_int$interviewtime,
 
 interview <- subset(date_asg_int, answer_3=="Yes")
 
-
 # number assigned
 date_asg_int$assign_dateonly <- lubridate::as_date(date_asg_int$assign_date)
 assigned<-sum(date_asg_int$assign_dateonly==yesterday, na.rm = TRUE)
@@ -32,7 +48,7 @@ assigned<-sum(date_asg_int$assign_dateonly==yesterday, na.rm = TRUE)
 # number interviewed
 date_asg_int$interviewtimeonly <- lubridate::as_date(date_asg_int$interviewtime)
 interviewed <- sum(date_asg_int$answer_3== "Yes" &
-                        date_asg_int$interviewtimeonly==yesterday, na.rm = TRUE)
+                     date_asg_int$interviewtimeonly==yesterday, na.rm = TRUE)
 
 
 interview$interviewtimeonly <- lubridate::as_date(interview$interviewtime)
@@ -52,15 +68,13 @@ interviewed48 <- sum(int_yest$timetoint<=48, na.rm = TRUE)
 # percent interviewed in 24 hours
 percent24 <- (interviewed24/interviewed)
 
-
-
 NIT <- load_nit()
 
 NIT$dateap <- lubridate::parse_date_time(NIT$date, orders= "ymdHM")
 
 
 # number of contacts identified
-contacts<- subset(NIT, select= c(dateap, numb_contacts_16))
+contacts <- subset(NIT, select= c(dateap, numb_contacts_16))
 
 contacts$dateaponly <- lubridate::as_date(contacts$dateap)
 contacts_yest <- subset (contacts,contacts$dateaponly == yesterday)
@@ -113,10 +127,10 @@ row_to_add <- tibble(
 )
 
 
-excel_data <- readxl::read_excel("V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/productivity report/productivity report.xlsx",
+excel_data <- readxl::read_excel("V:/Productivity/Daily Report for Administration/test/productivity report.xlsx",
                                  col_types = c("text", "date", rep("numeric", times = 10)))
 
 new_excel_data <- bind_rows(excel_data, row_to_add)
 
 
-openxlsx::write.xlsx(new_excel_data, file = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/productivity report/productivity report.xlsx")
+openxlsx::write.xlsx(new_excel_data, file = "V:/Productivity/Daily Report for Administration/test/productivity report.xlsx")

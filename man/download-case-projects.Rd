@@ -9,7 +9,7 @@
 download_nit(
   api_token = Sys.getenv("redcap_NIT_token"),
   headers = c("raw", "label"),
-  values = c("raw", "label"),
+  values = c("label", "raw"),
   filter = NULL,
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nit/",
   file = paste0("nit_data_", Sys.Date(), ".csv"),
@@ -19,7 +19,7 @@ download_nit(
 download_nca(
   api_token = Sys.getenv("redcap_NCA_token"),
   headers = c("raw", "label"),
-  values = c("raw", "label"),
+  values = c("label", "raw"),
   filter = NULL,
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nca/",
   file = paste0("nca_data_", Sys.Date(), ".csv"),

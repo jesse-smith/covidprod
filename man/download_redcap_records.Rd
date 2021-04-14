@@ -9,7 +9,7 @@ download_redcap_records(
   dir,
   file,
   headers = c("raw", "label"),
-  values = c("raw", "label"),
+  values = c("label", "raw"),
   filter = NULL,
   force = FALSE
 )
