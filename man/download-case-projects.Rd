@@ -12,7 +12,7 @@ download_nit(
   values = c("label", "raw"),
   filter = NULL,
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nit/",
-  file = paste0("nit_data_", Sys.Date(), ".csv"),
+  file = paste0("nit_data_", str_date(), ".csv"),
   force = FALSE
 )
 
@@ -22,7 +22,7 @@ download_nca(
   values = c("label", "raw"),
   filter = NULL,
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nca/",
-  file = paste0("nca_data_", Sys.Date(), ".csv"),
+  file = paste0("nca_data_", str_date(), ".csv"),
   force = FALSE
 )
 }

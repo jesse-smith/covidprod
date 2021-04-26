@@ -42,7 +42,7 @@ download_nit <- function(
   values = c("label", "raw"),
   filter = NULL,
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nit/",
-  file = paste0("nit_data_", Sys.Date(), ".csv"),
+  file = paste0("nit_data_", str_date(), ".csv"),
   force = FALSE
 ) {
   download_redcap_records(
@@ -65,7 +65,7 @@ download_nca <- function(
   values = c("label", "raw"),
   filter = NULL,
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nca/",
-  file = paste0("nca_data_", Sys.Date(), ".csv"),
+  file = paste0("nca_data_", str_date(), ".csv"),
   force = FALSE
 ) {
   download_redcap_records(
@@ -179,7 +179,7 @@ download_redcap_records <- function(
   api_params <- list(
     token               = api_token,
     content             = "record",
-    format              = "csv",
+    format              = "json",
     type                = "flat",
     rawOrLabel          = values,
     rawOrLabelHeaders   = headers,
@@ -194,10 +194,28 @@ download_redcap_records <- function(
     url = api_url,
     body = api_params,
     encode = "form",
-    httr::progress(),
-    httr::write_disk(path, overwrite = force)
+    httr::progress()
   ) %>%
-    httr::stop_for_status(paste("download REDcap data:", httr::content(.)))
+    httr::stop_for_status(paste("download REDcap data:", httr::content(.))) %>%
+    httr::content(as = "text") %>%
+    jsonlite::fromJSON() %>%
+    dplyr::as_tibble() %>%
+    write_file_delim(path = path)
 
   path
+}
+
+str_date <- function(date = lubridate::now()) {
+  validate_date_type(date)
+
+  if (rlang::is_scalar_character(date)) {
+    return(date)
+  } else if (lubridate::is.Date(date)) {
+    format(date, "%Y-%m-%d")
+  } else if (lubridate::is.POSIXt(date)) {
+    format(date, "%Y-%m-%d_%H%M%S")
+  } else {
+    date <- date_to_dt_dttm(date)
+    str_date(date)
+  }
 }

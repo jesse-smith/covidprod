@@ -21,7 +21,7 @@ path_nit <- function(date = NULL, force_latest = TRUE) {
     date_format = "%Y-%m-%d",
     date_regex = "[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}",
     date = date,
-    file_regex = ".*/nit_data_{date}[.]csv$",
+    file_regex = ".*/nit_data_{date}(_[0-9]{6})?[.]csv$",
     type = "file",
     force_latest = force_latest
   )
@@ -36,7 +36,7 @@ path_nca <- function(date = NULL, force_latest = TRUE) {
     date_format = "%Y-%m-%d",
     date_regex = "[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}",
     date = date,
-    file_regex = ".*/nca_data_{date}[.]csv$",
+    file_regex = ".*/nca_data_{date}(_[0-9]{6})?[.]csv$",
     type = "file",
     force_latest = force_latest
   )

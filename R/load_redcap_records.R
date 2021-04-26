@@ -37,6 +37,16 @@ load_nit <- function(
 ) {
   data <- read_file_delim(path, ...)
 
+  date_regex <- "[0-9]{4}.?[0-9]{2}.?[0-9]{2}.?[0-9]{6}"
+
+  date <- path %>%
+    fs::path_file() %>%
+    fs::path_ext_remove() %>%
+    stringr::str_extract(date_regex) %>%
+    date_to_dt_dttm()
+
+  data <- as_date_tbl(data, date = date)
+
   if (clean_names) janitor::clean_names(data) else data
 }
 
@@ -50,6 +60,16 @@ load_nca <- function(
   ...
 ) {
   data <- read_file_delim(path, ...)
+
+  date_regex <- "[0-9]{4}.?[0-9]{2}.?[0-9]{2}.?[0-9]{6}"
+
+  date <- path %>%
+    fs::path_file() %>%
+    fs::path_ext_remove() %>%
+    stringr::str_extract(date_regex) %>%
+    date_to_dt_dttm()
+
+  data <- as_date_tbl(data, date = date)
 
   if (clean_names) janitor::clean_names(data) else data
 }
