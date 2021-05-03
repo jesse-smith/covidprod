@@ -15,6 +15,7 @@ URL: https://jesse-smith.github.io/covidprod,
 BugReports: https://github.com/jesse-smith/covidprod/issues
 Imports:
     fs,
+    hms,
     httr,
     janitor,
     magrittr,
@@ -23,10 +24,13 @@ Imports:
 Suggests: 
     covr,
     dplyr,
+    jsonlite,
     lubridate,
+    stringi,
     stringr,
     testthat (>= 3.0.0),
     tibble,
+    tidyr,
     vctrs
 Remotes: 
     jesse-smith/coviData
