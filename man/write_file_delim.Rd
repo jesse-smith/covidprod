@@ -9,7 +9,7 @@ write_file_delim(
   path,
   delim = ",",
   na = "",
-  clean_chr = TRUE,
+  clean = TRUE,
   force = FALSE,
   ...
 )
@@ -24,13 +24,13 @@ comma-separated value (CSV) files.}
 
 \item{na}{String used for missing values. Defaults to blank (\code{""}).}
 
+\item{clean}{Should atomic columns be cleaned before writing? This prevents
+ambiguity when reading in later.}
+
 \item{force}{Should any existing files be overwritten?}
 
 \item{...}{Additional arguments to pass to
 \code{\link[vroom:vroom_write]{vroom_write()}}}
-
-\item{clean}{Should atomic columns be cleaned before writing? This prevents
-ambiguity when reading in later.}
 }
 \value{
 The input data
