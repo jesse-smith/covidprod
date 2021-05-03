@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Efficiently Write Delimited Files — write_file_delim • covidprod</title>
+<title>Convert a character Vector to ASCII Encoding — chr_to_ascii • covidprod</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Efficiently Write Delimited Files — write_file_delim" />
-<meta property="og:description" content="write_file_delim() writes delimited files using
-vroom_write()." />
+<meta property="og:title" content="Convert a character Vector to ASCII Encoding — chr_to_ascii" />
+<meta property="og:description" content="Convert a character Vector to ASCII Encoding" />
 
 
 
@@ -109,74 +108,33 @@ vroom_write()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Efficiently Write Delimited Files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidprod/blob/master/R/write_file_delim.R'><code>R/write_file_delim.R</code></a></small>
-    <div class="hidden name"><code>write_file_delim.Rd</code></div>
+    <h1>Convert a <code>character</code> Vector to ASCII Encoding</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jesse-smith/covidprod/blob/master/R/ascii.R'><code>R/ascii.R</code></a></small>
+    <div class="hidden name"><code>chr_to_ascii.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>write_file_delim()</code> writes delimited files using
-<code><a href='https://vroom.r-lib.org/reference/vroom_write.html'>vroom_write()</a></code>.</p>
+    <p>Convert a <code>character</code> Vector to ASCII Encoding</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_file_delim</span><span class='op'>(</span>
-  <span class='va'>x</span>,
-  <span class='va'>path</span>,
-  delim <span class='op'>=</span> <span class='st'>","</span>,
-  na <span class='op'>=</span> <span class='st'>""</span>,
-  clean <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>chr_to_ascii</span><span class='op'>(</span><span class='va'>chr</span>, trans <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Data frame or data frame extension to write to disk</p></td>
+      <th>trans</th>
+      <td><p>Should non-ASCII characters be transliterated?</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>Path or connection to write to</p></td>
-    </tr>
-    <tr>
-      <th>delim</th>
-      <td><p>Delimiter used to separate values. Defaults to <code>","</code> to write
-comma-separated value (CSV) files.</p></td>
-    </tr>
-    <tr>
-      <th>na</th>
-      <td><p>String used for missing values. Defaults to blank (<code>""</code>).</p></td>
-    </tr>
-    <tr>
-      <th>clean</th>
-      <td><p>Should atomic columns be cleaned before writing? This prevents
-ambiguity when reading in later.</p></td>
-    </tr>
-    <tr>
-      <th>force</th>
-      <td><p>Should any existing files be overwritten?</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments to pass to
-<code><a href='https://vroom.r-lib.org/reference/vroom_write.html'>vroom_write()</a></code></p></td>
+      <th>string</th>
+      <td><p>A <code>character</code> vector</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The input data</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>By default, files are comma-delimited with missing values represented as
-blank strings (<code>""</code>).</p>
-<p>When <code>clean = TRUE</code>, all atomic vectors are converted
-to <code>character</code>, transliterated to ASCII, and
-"<code><a href='https://stringr.tidyverse.org/reference/str_trim.html'>squished</a></code>". This is recommended unless
-preserving whitespace is important, as it prevents ambiguity when reading
-line breaks later.</p>
+    <p>The input, converted to ASCII representation</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
