@@ -21,6 +21,9 @@ summarize_nit <- function(data = load_nit()) {
         lubridate::as_date(),
       n_contacts = as.integer(.data[["numb_contacts_16"]]),
 
+      survey = .data[["start_1"]] == "START",
+      surveycomplete = .data[["start_1"]] == "START" & .data[["specimendate"]] != "NA",
+
     ) %>%
     # Filter to valid dates
     dplyr::filter(
@@ -32,6 +35,9 @@ summarize_nit <- function(data = load_nit()) {
     # Summary statistics
     dplyr::summarize(
       n_contacts_i = sum(.data[["n_contacts"]], na.rm = TRUE),
+
+      survey_i = sum(.data[["survey"]], na.rm = TRUE),
+      surveycomplete_i = sum(.data[["surveycomplete"]], na.rm = TRUE),
 
     ) %>%
     # Rename date variable to match `summarize_nca()`
