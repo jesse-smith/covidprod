@@ -6,6 +6,12 @@
 #' By default, files are comma-delimited with missing values represented as
 #' blank strings (`""`).
 #'
+#' When `clean = TRUE`, all atomic vectors are converted
+#' to `character`, transliterated to ASCII, and
+#' "\code{\link[stringr:str_squish]{squished}}". This is recommended unless
+#' preserving whitespace is important, as it prevents ambiguity when reading
+#' line breaks later.
+#'
 #' @param x Data frame or data frame extension to write to disk
 #'
 #' @param path Path or connection to write to
@@ -14,6 +20,9 @@
 #'   comma-separated value (CSV) files.
 #'
 #' @param na String used for missing values. Defaults to blank (`""`).
+#'
+#' @param clean Should atomic columns be cleaned before writing? This prevents
+#'   ambiguity when reading in later.
 #'
 #' @param force Should any existing files be overwritten?
 #'
@@ -26,6 +35,7 @@ write_file_delim <- function(
   path,
   delim = ",",
   na = "",
+  clean = TRUE,
   force = FALSE,
   ...
 ) {
@@ -38,8 +48,26 @@ write_file_delim <- function(
     )
   }
 
+  if (clean) {
+    x_write <- dplyr::mutate(
+      x,
+      dplyr::across(
+        where(rlang::is_atomic),
+        ~ .x %>%
+          as.character() %>%
+          chr_to_ascii() %>%
+          stringr::str_squish()
+      )
+    )
+  } else {
+    x_write <- x
+  }
+  remove(x)
+
+
+
   vroom::vroom_write(
-    x,
+    x_write,
     path = path,
     delim = delim,
     na = na,

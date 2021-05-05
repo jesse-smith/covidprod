@@ -117,7 +117,7 @@ summarize_nca <- function(data = load_nca()) {
       {{min_dt}} <= .data[["interview_dt"]],
       .data[["interview_dt"]] <= {{ max_dt }}
     ) %>%
-    dplyr::group_by(interview_dt) %>%
+    dplyr::group_by(.data[["interview_dt"]]) %>%
     dplyr::summarize(
       n_interviewed_i = sum(.data[["interviewed"]], na.rm = TRUE),
       n_interviewed_in_48_i = sum(.data[["interviewed_in_48"]], na.rm = TRUE),

@@ -4,7 +4,15 @@
 \alias{write_file_delim}
 \title{Efficiently Write Delimited Files}
 \usage{
-write_file_delim(x, path, delim = ",", na = "", force = FALSE, ...)
+write_file_delim(
+  x,
+  path,
+  delim = ",",
+  na = "",
+  clean = TRUE,
+  force = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x}{Data frame or data frame extension to write to disk}
@@ -15,6 +23,9 @@ write_file_delim(x, path, delim = ",", na = "", force = FALSE, ...)
 comma-separated value (CSV) files.}
 
 \item{na}{String used for missing values. Defaults to blank (\code{""}).}
+
+\item{clean}{Should atomic columns be cleaned before writing? This prevents
+ambiguity when reading in later.}
 
 \item{force}{Should any existing files be overwritten?}
 
@@ -31,4 +42,10 @@ The input data
 \details{
 By default, files are comma-delimited with missing values represented as
 blank strings (\code{""}).
+
+When \code{clean = TRUE}, all atomic vectors are converted
+to \code{character}, transliterated to ASCII, and
+"\code{\link[stringr:str_squish]{squished}}". This is recommended unless
+preserving whitespace is important, as it prevents ambiguity when reading
+line breaks later.
 }
