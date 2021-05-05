@@ -41,6 +41,7 @@ download_nit <- function(
   headers = c("raw", "label"),
   values = c("label", "raw"),
   filter = NULL,
+  fields = c("record_id", "date", "numb_contacts_16"),
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nit/",
   file = paste0("nit_data_", str_date(), ".csv"),
   force = FALSE
@@ -50,6 +51,7 @@ download_nit <- function(
     headers = headers,
     values = values,
     filter = filter,
+    fields = fields,
     dir = dir,
     file = file,
     force = force
@@ -64,6 +66,7 @@ download_nca <- function(
   headers = c("raw", "label"),
   values = c("label", "raw"),
   filter = NULL,
+  fields = c("result"),
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nca/",
   file = paste0("nca_data_", str_date(), ".csv"),
   force = FALSE
@@ -73,6 +76,7 @@ download_nca <- function(
     headers = headers,
     values = values,
     filter = filter,
+    fields = fields,
     dir = dir,
     file = file,
     force = force
@@ -120,6 +124,7 @@ download_redcap_records <- function(
   headers = c("raw", "label"),
   values = c("label", "raw"),
   filter = NULL,
+  fields = NULL,
   force = FALSE
 ) {
 
@@ -128,8 +133,12 @@ download_redcap_records <- function(
     rlang::abort("`api_token` must be a scalar character string")
   }
   # Check `filter`
-  if (!(is.null(filter) || rlang::is_scalar_character(filter))) {
-    rlang::abort("`filter` must be `NULL` or a scalar character string")
+  if (!(is.null(filter) || rlang::is_string(filter))) {
+    rlang::abort("`filter` must be `NULL` or a string")
+  }
+  # Check `fields`
+  if (!(is.null(fields) || rlang::is_character(fields))) {
+    rlang::abort("`fields` must be `NULL` or a `character` vector")
   }
   # Check `force`
   if (!rlang::is_bool(force)) rlang::abort("`force` must be `TRUE` or `FALSE`")
@@ -187,22 +196,50 @@ download_redcap_records <- function(
     returnFormat        = "json"
   )
   # Add filter logic if `filter` is not `NULL`
-  if (!is.null(filter)) api_params <- c(api_params, filterLogic = filter)
+  if (!is.null(filter)) {
+    api_params <- c(api_params, filterLogic = filter)
+  }
+  # Add variables to include if `vars` is not `NULL`
+  if (!is.null(fields)) {
+    api_params <- as.list(fields) %>%
+      set_names(paste0('fields[', seq_along(fields) - 1L, ']')) %>%
+      append(x = api_params)
+  }
 
-  httr::RETRY(
+  write_file_delim(
+    send_redcap_request(api_url, api_params),
+    path = path,
+    force = force
+  )
+
+  path
+}
+
+send_redcap_request <- function(url, params, as_tibble = TRUE) {
+
+  if (!rlang::is_string(url)) rlang::abort('`url` must be a string')
+  if (!rlang::is_list(params)) rlang::abort('`params` must be a list')
+  if (!rlang::is_bool(as_tibble)) {
+    rlang::abort('`as_tibble` must be a boolean value')
+  }
+
+  response <- httr::RETRY(
     "POST",
-    url = api_url,
-    body = api_params,
+    url = url,
+    body = params,
     encode = "form",
     httr::progress()
   ) %>%
-    httr::stop_for_status(paste("download REDcap data:", httr::content(.))) %>%
-    httr::content(as = "text") %>%
-    jsonlite::fromJSON() %>%
-    dplyr::as_tibble() %>%
-    write_file_delim(path = path)
+    httr::stop_for_status(paste("download REDcap data:", httr::content(.)))
 
-  path
+  if (as_tibble) {
+    response %>%
+      httr::content(as = "text") %>%
+      jsonlite::fromJSON() %>%
+      dplyr::as_tibble()
+  } else {
+    response
+  }
 }
 
 str_date <- function(date = lubridate::now()) {
