@@ -147,13 +147,13 @@ summarize_nca <- function(data = load_nca()) {
         .data[["n_complete"]]
       ),
       # Median times
-      median_hours_to_attempt = median(
+      median_hours_to_attempt = stats::median(
         .data[["hours_to_attempt"]],
         na.rm = TRUE
       ) %>%
         as.double() %>%
         round(1L),
-      q90_hours_to_attempt = quantile(
+      q90_hours_to_attempt = stats::quantile(
         .data[["hours_to_attempt"]],
         probs = 0.9,
         na.rm = TRUE,
@@ -161,13 +161,13 @@ summarize_nca <- function(data = load_nca()) {
       ) %>%
         as.double() %>%
         round(1L),
-      median_hours_to_reach = median(
+      median_hours_to_reach = stats::median(
         .data[["hours_to_reach"]],
         na.rm = TRUE
       ) %>%
         as.double() %>%
         round(1L),
-      q90_hours_to_reach = quantile(
+      q90_hours_to_reach = stats::quantile(
         .data[["hours_to_reach"]],
         probs = 0.9,
         na.rm = TRUE,
@@ -203,13 +203,13 @@ summarize_nca <- function(data = load_nca()) {
         .data[["n_interviewed_in_48_i"]],
         .data[["n_interviewed_i"]]
       ),
-      median_hours_to_interview_i = median(
+      median_hours_to_interview_i = stats::median(
         .data[["hours_to_reach"]],
         na.rm = TRUE
       ) %>%
         as.double() %>%
         round(1L),
-      q90_hours_to_interview_i = quantile(
+      q90_hours_to_interview_i = stats::quantile(
         .data[["hours_to_reach"]],
         probs = 0.9,
         na.rm = TRUE,
