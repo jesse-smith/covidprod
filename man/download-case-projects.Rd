@@ -11,7 +11,8 @@ download_nit(
   headers = c("raw", "label"),
   values = c("label", "raw"),
   filter = NULL,
-  fields = c("record_id", "date", "numb_contacts_16"),
+  fields = c("record_id", "date", "numb_contacts_16", "start", "specimendate",
+    "case_interview_complete"),
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nit/",
   file = paste0("nit_data_", str_date(), ".csv"),
   force = FALSE
@@ -22,7 +23,7 @@ download_nca(
   headers = c("raw", "label"),
   values = c("label", "raw"),
   filter = NULL,
-  fields = c("result"),
+  fields = NULL,
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nca/",
   file = paste0("nca_data_", str_date(), ".csv"),
   force = FALSE
