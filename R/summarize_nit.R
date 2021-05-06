@@ -19,11 +19,7 @@ summarize_nit <- function(data = load_nit()) {
       interview_dt = .data[["date"]] %>%
         lubridate::parse_date_time(orders = c("ymdHM", "ymdT", "ymd")) %>%
         lubridate::as_date(),
-      n_contacts = as.integer(.data[["numb_contacts_16"]]),
-
-      survey = .data[["start_1"]] == "START",
-      surveycomplete = .data[["start_1"]] == "START" & .data[["specimendate"]] != "NA",
-
+      n_contacts = as.integer(.data[["numb_contacts_16"]])
     ) %>%
     # Filter to valid dates
     dplyr::filter(
@@ -34,18 +30,17 @@ summarize_nit <- function(data = load_nit()) {
     dplyr::group_by(.data[["interview_dt"]]) %>%
     # Summary statistics
     dplyr::summarize(
-      n_contacts_i = sum(.data[["n_contacts"]], na.rm = TRUE),
-
-      survey_i = sum(.data[["survey"]], na.rm = TRUE),
-      surveycomplete_i = sum(.data[["surveycomplete"]], na.rm = TRUE),
-
+      n_contacts_i = sum(.data[["n_contacts"]], na.rm = TRUE)
     ) %>%
     # Rename date variable to match `summarize_nca()`
     dplyr::rename(date = "interview_dt") %>%
     # Fill in implicitly missing dates
     tidyr::complete(
       "date" = seq(min_dt, max_dt, by = 1L),
-      fill = as.list(rep(0, NROW(.) - 1L))
+      fill = magrittr::set_names(
+        as.list(rep(0, NROW(.) - 1L)),
+        colnames(.)[2:NROW(.)]
+      )
     ) %>%
     # Coerce to date_tbl
     as_date_tbl(date = if (is.null(data_dttm)) NA else data_dttm)
