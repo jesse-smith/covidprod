@@ -11,6 +11,7 @@ download_nit(
   headers = c("raw", "label"),
   values = c("label", "raw"),
   filter = NULL,
+  fields = c("record_id", "date", "numb_contacts_16"),
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nit/",
   file = paste0("nit_data_", str_date(), ".csv"),
   force = FALSE
@@ -21,6 +22,7 @@ download_nca(
   headers = c("raw", "label"),
   values = c("label", "raw"),
   filter = NULL,
+  fields = c("result"),
   dir = "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/Data for R/nca/",
   file = paste0("nca_data_", str_date(), ".csv"),
   force = FALSE
@@ -42,6 +44,9 @@ or the label for the coded value (\code{"label"})?}
 
 \item{filter}{\code{character}. REDcap filtering logic to apply prior to download.
 This must be in the REDcap logic syntax.}
+
+\item{fields}{\code{character}. A vector of field names to include; if \code{NULL},
+all fields will be downloaded.}
 
 \item{dir}{\code{character}. Directory to save data; this should usually remain
 unchanged.}

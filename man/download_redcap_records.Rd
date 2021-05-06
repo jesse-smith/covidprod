@@ -11,6 +11,7 @@ download_redcap_records(
   headers = c("raw", "label"),
   values = c("label", "raw"),
   filter = NULL,
+  fields = NULL,
   force = FALSE
 )
 }
@@ -38,6 +39,9 @@ or the label for the coded value (\code{"label"})?}
 
 \item{filter}{\code{character}. REDcap filtering logic to apply prior to download.
 This must be in the REDcap logic syntax.}
+
+\item{fields}{\code{character}. A vector of field names to include; if \code{NULL},
+all fields will be downloaded.}
 
 \item{force}{Should the download overwrite an existing file, if one exists?
 The default is \code{FALSE}, which errors if an existing file is found.}
