@@ -110,8 +110,8 @@ ennotify_context("Saving productivity workbook")
 openxlsx::saveWorkbook(
   wb,
   file = fs::path(
-    "V:/Productivity/Daily Report for Administration/test/",
-    "productivity_report2.xlsx"
+    "V:/Productivity/Daily Report for Administration/",
+    "productivity_report.xlsx"
   ),
   overwrite = TRUE
 )
