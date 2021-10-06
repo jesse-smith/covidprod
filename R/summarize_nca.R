@@ -16,6 +16,8 @@ summarize_nca <- function(data = load_nca()) {
   # Transform data
   data_t <- data %>%
     dplyr::transmute(
+      # NBS number for deduplication
+      nbs = stringr::str_extract(.data[["nbs"]], "[0-9]+"),
       # Create `reached`
       surveyed = dplyr::na_if(.data[["resultofinter_5"]] == "1", FALSE),
       interview1 = dplyr::if_else(.data[["answer_3"]] == "Yes", TRUE, NA),
@@ -94,7 +96,13 @@ summarize_nca <- function(data = load_nca()) {
     dplyr::select(
       -dplyr::ends_with("_dttm"),
       -dplyr::starts_with(c("interview1", "interview2"))
-    )
+    ) %>%
+    dplyr::arrange(
+      .data[["nbs"]],
+      dplyr::desc(.data[["reached"]]),
+      .data[["assign_dt"]]
+    ) %>%
+    coviData::coalesce_dupes(.data[["nbs"]])
 
   remove(data)
 
