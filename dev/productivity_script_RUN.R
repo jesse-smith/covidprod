@@ -115,3 +115,43 @@ openxlsx::saveWorkbook(
   ),
   overwrite = TRUE
 )
+
+if (weekdays(Sys.Date()) == "Thursday") {
+  prod_tbl <- covidReport::prod_table()
+  pptx <- officer::read_pptx(system.file(
+    "extdata", "covid_report_template.pptx",
+    package = "covidReport",
+    mustWork = TRUE
+  ))
+  prod_title <- "14-Day Case Investigation Metrics"
+  prod_sub <- covidReport::prod_calc() %>%
+    attr("dt_range") %>%
+    format("%B %d, %Y") %>%
+    paste0(collapse = " - ")
+  pptx <- pptx %>%
+    officer::add_slide("Table", "HD Blue and White") %>%
+    officer::ph_with(
+      value = prod_title,
+      location = officer::ph_location_type("title")
+    ) %>%
+    officer::ph_with(
+      value = prod_sub,
+      location = officer::ph_location_type("subTitle")
+    ) %>%
+    officer::ph_with(
+      value = prod_tbl,
+      location = covidReport:::ph_location_table(
+        prod_tbl,
+        pptx,
+        layout = "Table",
+        pos_h = FALSE,
+        valign = 1
+      )
+    )
+
+  ppt_path <- paste0(
+    "V:/EPI DATA ANALYTICS TEAM/COVID SANDBOX REDCAP DATA/jtf_figs/prod_table/",
+    "prod_table_", Sys.Date(), ".pptx"
+  )
+  print(pptx, target = ppt_path)
+}
